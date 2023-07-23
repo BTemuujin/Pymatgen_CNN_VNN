@@ -4,11 +4,7 @@ import numpy as np
 import pandas as pd
 
 # Load the structure
-structure = Poscar.from_file("POSCAR_Fe").structure
-
-# Add oxidation states
-oxidation_states = {'Fe': +2, 'Ge': -2}
-structure.add_oxidation_state_by_element(oxidation_states)
+structure = Poscar.from_file("POSCAR").structure
 
 # Initialize CrystalNN and VoronoiNN
 cnn = CrystalNN(cation_anion=False, distance_cutoffs=(0, 3.0))  # set cut-off to 3 Angstrom
@@ -53,4 +49,4 @@ for n, site in enumerate(structure):
 # Create a DataFrame from the collected data
 df = pd.DataFrame(data, columns=['Min distance (Å)', 'Max distance (Å)', 'Mean distance (Å)', 'Mean volume (Å³)', 'Volume std. dev. (Å³)', 'Coordination number'])
 print(df)
-df.to_csv("CNN_VNN_Fe.txt", sep="\t", index=False)
+df.to_csv("CNN_VNN.txt", sep="\t", index=False)
